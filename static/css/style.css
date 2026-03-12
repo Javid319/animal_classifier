@@ -1,0 +1,331 @@
+/* ========================================
+   Animal Classifier - Enhanced UI Styles
+   ======================================== */
+
+:root {
+    --primary-color: #4f46e5;
+    --primary-hover: #4338ca;
+    --success-color: #10b981;
+    --bg-gradient-start: #f0f9ff;
+    --bg-gradient-end: #e0e7ff;
+    --card-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+/* ========================================
+   Main Card
+   ======================================== */
+.main-card {
+    border: none;
+    border-radius: 24px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    background: white;
+    transition: transform var(--transition-speed);
+}
+
+.main-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #7c3aed 100%);
+    color: white;
+    padding: 40px 30px;
+    border: none;
+}
+
+.card-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.card-title i {
+    font-size: 2rem;
+}
+
+.card-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.card-body {
+    padding: 40px 30px;
+}
+
+.card-footer {
+    background: #f8fafc;
+    border: none;
+    padding: 20px;
+}
+
+/* ========================================
+   Upload Section
+   ======================================== */
+.upload-section {
+    margin-bottom: 20px;
+}
+
+.upload-area {
+    border: 3px dashed #cbd5e1;
+    border-radius: 16px;
+    padding: 60px 40px;
+    text-align: center;
+    transition: all var(--transition-speed);
+    background: #fafafa;
+    cursor: pointer;
+}
+
+.upload-area:hover,
+.upload-area.drag-over {
+    border-color: var(--primary-color);
+    background: #f0f5ff;
+}
+
+.upload-icon {
+    font-size: 4rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.upload-text {
+    font-size: 1.2rem;
+    color: #475569;
+    margin-bottom: 10px;
+}
+
+.upload-or {
+    color: #94a3b8;
+    margin-bottom: 20px;
+}
+
+.btn-browse {
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    background: var(--primary-color);
+    border: none;
+    transition: all var(--transition-speed);
+}
+
+.btn-browse:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+}
+
+/* ========================================
+   Preview Section
+   ======================================== */
+.preview-section {
+    margin-bottom: 20px;
+}
+
+.image-preview {
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.image-preview img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-height: 400px;
+    object-fit: contain;
+    background: #f1f5f9;
+}
+
+.preview-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.preview-actions .btn {
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 10px;
+}
+
+/* ========================================
+   Loading Section
+   ======================================== */
+.loading-section {
+    text-align: center;
+    padding: 40px;
+}
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+    border-width: 4px;
+}
+
+/* ========================================
+   Result Section
+   ======================================== */
+.result-section {
+    text-align: center;
+}
+
+.result-card {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border-radius: 16px;
+    padding: 40px;
+    margin-bottom: 20px;
+    border: 2px solid var(--success-color);
+}
+
+.result-icon {
+    font-size: 3rem;
+    color: var(--success-color);
+    margin-bottom: 15px;
+}
+
+.result-label {
+    font-size: 1rem;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.result-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 20px;
+}
+
+.confidence-bar {
+    background: #e2e8f0;
+    border-radius: 10px;
+    height: 12px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.confidence-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--success-color) 0%, #34d399 100%);
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    width: 0%;
+}
+
+.confidence-text {
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+#confidenceValue {
+    font-weight: 700;
+    color: var(--success-color);
+}
+
+/* ========================================
+   Footer
+   ======================================== */
+.supported-text {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* ========================================
+   Animations
+   ======================================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* ========================================
+   Responsive Design
+   ======================================== */
+@media (max-width: 768px) {
+    .card-title {
+        font-size: 1.8rem;
+    }
+    
+    .card-body {
+        padding: 30px 20px;
+    }
+    
+    .upload-area {
+        padding: 40px 20px;
+    }
+    
+    .result-value {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 20px 10px;
+    }
+    
+    .card-title {
+        font-size: 1.5rem;
+    }
+    
+    .preview-actions {
+        flex-direction: column;
+    }
+    
+    .preview-actions .btn {
+        width: 100%;
+    }
+}
+
