@@ -1,0 +1,4 @@
+data/
+.venv/
+predict.py
+train.py
