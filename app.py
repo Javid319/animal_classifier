@@ -6,31 +6,36 @@ import os
 
 app = Flask(__name__)
 
-# Load trained CNN model
-model = tf.keras.models.load_model("animal_classifier.h5", compile=False)
+# Fix model path
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+model_path = os.path.join(BASE_DIR, "animal_classifier.h5")
 
-# Animal classes
+model = tf.keras.models.load_model(model_path, compile=False)
+
 classes = ["Buffalo", "Elephant", "Rhino", "Zebra"]
 
-# Image preprocessing
 def preprocess_image(image):
-    image = image.convert("RGB")  # ensure 3 channels
+    image = image.convert("RGB")
     image = image.resize((128, 128))
     image = np.array(image) / 255.0
     image = np.expand_dims(image, axis=0)
     return image
 
-
 @app.route("/")
 def home():
     return render_template("index.html")
 
-
 @app.route("/predict", methods=["POST"])
 def predict():
-    file = request.files["image"]
-    img = Image.open(file)
+    if "image" not in request.files:
+        return jsonify({"error": "No file uploaded"})
 
+    file = request.files["image"]
+
+    if file.filename == "":
+        return jsonify({"error": "Empty file"})
+
+    img = Image.open(file)
     img = preprocess_image(img)
 
     prediction = model.predict(img)
@@ -42,8 +47,6 @@ def predict():
         "confidence": confidence
     })
 
-
-# Render deployment configuration
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
