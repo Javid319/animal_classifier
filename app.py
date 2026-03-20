@@ -27,26 +27,36 @@ def home():
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    if "image" not in request.files:
-        return jsonify({"error": "No file uploaded"})
+    try:
+        if "image" not in request.files:
+            return jsonify({"error": "No file uploaded"})
 
-    file = request.files["image"]
+        file = request.files["image"]
 
-    if file.filename == "":
-        return jsonify({"error": "Empty file"})
+        if file.filename == "":
+            return jsonify({"error": "Empty file"})
 
-    img = Image.open(file)
-    img = preprocess_image(img)
+        print("File received:", file.filename)
 
-    prediction = model.predict(img)
-    class_name = classes[np.argmax(prediction)]
-    confidence = float(np.max(prediction))
+        img = Image.open(file)
+        img = preprocess_image(img)
 
-    return jsonify({
-        "prediction": class_name,
-        "confidence": confidence
-    })
+        print("Image processed")
 
+        prediction = model.predict(img)
+        print("Prediction done:", prediction)
+
+        class_name = classes[np.argmax(prediction)]
+        confidence = float(np.max(prediction))
+
+        return jsonify({
+            "prediction": class_name,
+            "confidence": confidence
+        })
+
+    except Exception as e:
+        print("ERROR:", str(e))   # 👈 THIS WILL SHOW IN RENDER LOGS
+        return jsonify({"error": str(e)})
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
